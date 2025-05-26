@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="favicon.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitations</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
     <style>
         :root {
             /* Dark Theme (Default) Variables */
@@ -17,9 +17,9 @@
             --modal-transparent-dark: rgba(51, 51, 51, 0.7);
             --search-background-dark: rgba(51, 51, 51, 0.5);
             --dark-overlay: rgba(51, 51, 51, 0.2);
-            --dark-transparent: rgba(255, 255, 255, 0.1); 
+            --dark-transparent: rgba(255, 255, 255, 0.1);
             --glass-border-dark: rgba(100, 100, 100, 0.2);
-            
+
             /* Light Theme Variables */
             --background-color-light: #f0f0f0;
             --text-color-light: #333333;
@@ -30,7 +30,7 @@
             --light-overlay: rgba(220, 220, 220, 0.2);
             --light-transparent: rgba(255, 255, 255, 0.1);
             --glass-border-light: rgba(200, 200, 200, 0.2);
-            
+
             /* Default to Dark Theme */
             --background-color: var(--background-color-dark);
             --text-color: var(--text-color-dark);
@@ -42,7 +42,7 @@
             --transparent-color: var(--dark-transparent);
             --glass-border: var(--glass-border-dark);
         }
-        
+
         body.light-theme {
             --background-color: var(--background-color-light);
             --text-color: var(--text-color-light);
@@ -54,104 +54,1165 @@
             --transparent-color: var(--light-transparent);
             --glass-border: var(--glass-border-light);
         }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-image: url("/invitations/preview.png");
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position-y: 50%;
-            background-color: var(--background-color);
-            backdrop-filter: blur(1px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+
+        button, .tab-btn, .action-btn {
+            transform: scale(1);
+            transition: transform 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
+            border: 1px solid var(--glass-border);
+        }
+
+        * {
             margin: 0;
-            color: var(--text-color);
-            user-select: none;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .content {
-            background-color: var(--modal-background);
-            padding: 30px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            font-size: 40px;
-            margin: 10px 0;
-            color: #e74c3c;
-        }
-
-        p {
-            font-size: 20px;
-            margin: 10px 0;
-            color: var(--text-color);
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .material-symbols-rounded {
-            font-size: 50px;
-            color: #e74c3c;
+            vertical-align: middle;
+        }
+
+        body {
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-top: 80px;
+            user-select: none;
+            transition: background-color 0.3s, color 0.3s;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: row;
+            gap: 10px;
+            padding: 15px 20px;
+            background-color: transparent;
+            border: none;
+            position: fixed;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            transition: top 0.3s ease;
+            width: 100%;
+            flex-wrap: wrap;
+            height: 80px;
+        }
+
+        .tab-container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            backdrop-filter: blur(1px);
+        }
+
+        .tab-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            backdrop-filter: blur(10px);
+            mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 1) 90%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 1) 90%,
+                rgba(0, 0, 0, 0) 100%
+            );
+        }
+
+        .tab-btn {
+            background-color: var(--search-background);
+            color: var(--text-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn.active {
+            background-color: var(--text-color);
+            color: var(--background-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: var(--search-background);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .create-input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .create-btn {
+            background-color: var(--search-background);
+            color: var(--text-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .invitation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .invitation-card {
+            padding: 20px;
+            background-color: var(--search-background);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .invitation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .invitation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .invitation-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            background-color: var(--search-background);
+            color: var(--text-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            backdrop-filter: blur(10px);
+        }
+
+        .invitation-details {
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .invitation-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--secondary-text-color);
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .template-card {
+            padding: 20px;
+            background-color: var(--search-background);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: transform 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .template-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .template-description {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 12px;
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, var(--search-background), var(--overlay-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--secondary-text-color);
+            border: 1px solid var(--glass-border);
+        }
+
+        .create-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--overlay-color);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.25s, opacity 0.25s linear;
+        }
+
+        .create-modal.show {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+
+        .modal-content {
+            background-color: var(--search-background);
+            border-radius: 40px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(50px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            background-color: var(--search-background);
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .preview-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--overlay-color);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .preview-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .invitation-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invitation-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+
+        .preview-event-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .preview-event-details {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .preview-event-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        button:active, .template-card:active {
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
+        }
+
+        .reduce-animations * {
+            animation: none !important;
+            transition: opacity 0.3s ease !important;
+            transition-property: opacity !important;
+        }
+
+        .reduce-animations button, .reduce-animations .template-card {
+            transform: scale(1) !important;
+            transition: opacity 0.3s ease !important;
+        }
+
+        .reduce-animations button:active, .reduce-animations .template-card:active {
+            transform: scale(0.98) !important;
+            transition: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .tab-container {
+                height: 130px;
+                align-content: flex-end;
+            }
+            
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="content">
-            <span class="material-symbols-rounded">hide_source</span>
-            <h1>Invitations is coming soon</h1>
-            <p>The Invitations app is unreleased. It will release on the 15th of June, 2025.</p>
+        <div class="tab-container">
+            <button class="tab-btn active" data-tab="create">
+                <span class="material-symbols-rounded">add</span>Create
+            </button>
+            <button class="tab-btn" data-tab="invitations">
+                <span class="material-symbols-rounded">mail</span>My Invitations
+            </button>
+            <button class="tab-btn" data-tab="templates">
+                <span class="material-symbols-rounded">palette</span>Templates
+            </button>
+        </div>
+
+        <!-- Create Tab -->
+        <div class="tab-content active" id="create-content">
+            <div class="input-section">
+                <input type="text" class="create-input" placeholder="Quick create: 'Birthday Party @ May 15 3pm'">
+                <button class="create-btn" id="quick-create-btn">
+                    <span class="material-symbols-rounded">add</span>
+                </button>
+            </div>
+            
+            <div class="templates-grid">
+                <div class="template-card" data-template="birthday">
+                    <div class="template-title">Birthday Party</div>
+                    <div class="template-description">Perfect for birthday celebrations with cake and balloons theme</div>
+                    <div class="template-preview">🎂</div>
+                </div>
+                
+                <div class="template-card" data-template="wedding">
+                    <div class="template-title">Wedding</div>
+                    <div class="template-description">Elegant design for wedding invitations and ceremonies</div>
+                    <div class="template-preview">💒</div>
+                </div>
+                
+                <div class="template-card" data-template="meeting">
+                    <div class="template-title">Business Meeting</div>
+                    <div class="template-description">Professional template for corporate events and meetings</div>
+                    <div class="template-preview">📋</div>
+                </div>
+                
+                <div class="template-card" data-template="party">
+                    <div class="template-title">General Party</div>
+                    <div class="template-description">Fun template for any celebration or gathering</div>
+                    <div class="template-preview">🎉</div>
+                </div>
+                
+                <div class="template-card" data-template="graduation">
+                    <div class="template-title">Graduation</div>
+                    <div class="template-description">Academic theme for graduation ceremonies</div>
+                    <div class="template-preview">🎓</div>
+                </div>
+                
+                <div class="template-card" data-template="custom">
+                    <div class="template-title">Custom Design</div>
+                    <div class="template-description">Start from scratch with your own design</div>
+                    <div class="template-preview">✨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Invitations Tab -->
+        <div class="tab-content" id="invitations-content">
+            <div class="invitation-list">
+                <!-- Invitations will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Templates Tab -->
+        <div class="tab-content" id="templates-content">
+            <div class="templates-grid">
+                <div class="template-card" data-template="modern">
+                    <div class="template-title">Modern Minimalist</div>
+                    <div class="template-description">Clean and contemporary design</div>
+                    <div class="template-preview">📐</div>
+                </div>
+                
+                <div class="template-card" data-template="vintage">
+                    <div class="template-title">Vintage Classic</div>
+                    <div class="template-description">Traditional style with ornate details</div>
+                    <div class="template-preview">🏛️</div>
+                </div>
+                
+                <div class="template-card" data-template="floral">
+                    <div class="template-title">Floral Garden</div>
+                    <div class="template-description">Beautiful botanical designs</div>
+                    <div class="template-preview">🌸</div>
+                </div>
+                
+                <div class="template-card" data-template="geometric">
+                    <div class="template-title">Geometric Pattern</div>
+                    <div class="template-description">Bold shapes and modern patterns</div>
+                    <div class="template-preview">◆</div>
+                </div>
+            </div>
         </div>
     </div>
-    
+
+    <!-- Create Invitation Modal -->
+    <div class="create-modal" id="create-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Create New Invitation</div>
+                <button class="close-modal" id="close-modal">×</button>
+            </div>
+            
+            <form id="invitation-form">
+                <div class="form-group">
+                    <label class="form-label">Event Title</label>
+                    <input type="text" class="form-input" id="event-title" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time</label>
+                        <input type="time" class="form-input" id="event-time">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-input" id="event-location">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="event-description" placeholder="Additional details about your event..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">RSVP Email (optional)</label>
+                    <input type="email" class="form-input" id="rsvp-email">
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-title">Live Preview</div>
+                    <div class="invitation-preview">
+                        <div class="preview-event-title" id="preview-title">Event Title</div>
+                        <div class="preview-event-details" id="preview-details">Date & Time • Location</div>
+                        <div class="preview-event-description" id="preview-description">Event description will appear here</div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Create Invitation</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Theme synchronization for Gurapp side
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initial theme application based on localStorage
-            const storedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.classList.toggle('light-theme', storedTheme === 'light');
-            
-            // Initial animation preference application
-            const animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
-            document.body.classList.toggle('reduce-animations', !animationsEnabled);
-            
-            // Set up listener for theme change messages
-            window.addEventListener('message', (event) => {
-                // Verify message origin and type for security
-                if (event.origin === window.location.origin) {
-                    if (event.data.type === 'themeUpdate') {
-                        const newTheme = event.data.theme;
-                        document.body.classList.toggle('light-theme', newTheme === 'light');
-                        console.log('App theme updated via message to:', newTheme);
-                    } else if (event.data.type === 'animationsUpdate') {
-                        const enableAnimations = event.data.enabled;
-                        document.body.classList.toggle('reduce-animations', !enableAnimations);
-                        console.log('App animations updated via message to:', enableAnimations ? 'enabled' : 'disabled');
-                    }
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                tabContents.forEach(content => content.classList.remove('active'));
+                const tabId = button.dataset.tab + '-content';
+                document.getElementById(tabId).classList.add('active');
+                
+                if (button.dataset.tab === 'invitations') {
+                    renderInvitations();
                 }
             });
-            
-            // Optional: Set up polling fallback to ensure settings stay in sync
-            setInterval(() => {
-                const currentTheme = localStorage.getItem('theme') || 'dark';
-                document.body.classList.toggle('light-theme', currentTheme === 'light');
-                
-                const currentAnimState = localStorage.getItem('animationsEnabled') !== 'false';
-                document.body.classList.toggle('reduce-animations', !currentAnimState);
-            }, 5000);
         });
-    </script>
+
+        // Data storage
+        let invitations = JSON.parse(localStorage.getItem('invitations')) || [];
+        
+        // Modal functionality
+        const createModal = document.getElementById('create-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const invitationForm = document.getElementById('invitation-form');
+        let selectedTemplate = 'custom';
+        
+        // Template selection
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', () => {
+                selectedTemplate = card.dataset.template;
+                openCreateModal();
+            });
+        });
+        
+        function openCreateModal() {
+            createModal.classList.add('show');
+            updatePreview();
+        }
+        
+        function closeCreateModal() {
+            createModal.classList.remove('show');
+            invitationForm.reset();
+        }
+        
+        closeModalBtn.addEventListener('click', closeCreateModal);
+        
+        createModal.addEventListener('click', (e) => {
+            if (e.target === createModal) {
+                closeCreateModal();
+            }
+        });
+        
+        // Live preview updates
+        const previewTitle = document.getElementById('preview-title');
+        const previewDetails = document.getElementById('preview-details');
+        const previewDescription = document.getElementById('preview-description');
+        
+        function updatePreview() {
+            const title = document.getElementById('event-title').value || 'Event Title';
+            const date = document.getElementById('event-date').value;
+            const time = document.getElementById('event-time').value;
+            const location = document.getElementById('event-location').value;
+            const description = document.getElementById('event-description').value || 'Event description will appear here';
+            
+            previewTitle.textContent = title;
+            
+            let details = '';
+            if (date) {
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                details += formattedDate;
+            }
+            if (time) {
+                const formattedTime = new Date(`2000-01-01T${time}`).toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    minute: '2-digit' 
+                });
+                details += (details ? ' at ' : '') + formattedTime;
+            }
+            if (location) {
+                details += (details ? ' • ' : '') + location;
+            }
+            
+            previewDetails.textContent = details || 'Date & Time • Location';
+            previewDescription.textContent = description;
+        }
+        
+        // Form input listeners for live preview
+        ['event-title', 'event-date', 'event-time', 'event-location', 'event-description'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updatePreview);
+        });
+        
+        // Form submission
+        invitationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const invitation = {
+                id: Date.now(),
+                template: selectedTemplate,
+                title: document.getElementById('event-title').value,
+                date: document.getElementById('event-date').value,
+                time: document.getElementById('event-time').value,
+                location: document.getElementById('event-location').value,
+                description: document.getElementById('event-description').value,
+                rsvpEmail: document.getElementById('rsvp-email').value,
+                created: new Date().toISOString()
+            };
+            
+            invitations.push(invitation);
+            saveInvitations();
+            closeCreateModal();
+            
+            // Switch to invitations tab
+            document.querySelector('[data-tab="invitations"]').click();
+        });
+        
+        // Quick create functionality
+        const quickCreateInput = document.querySelector('.create-input');
+        const quickCreateBtn = document.getElementById('quick-create-btn');
+        
+        function parseQuickCreate(text) {
+            const match = text.match(/^(.*?)(?:\s+@\s+(.*?))?$/);
+            if (!match) return null;
+            
+            const title = match[1].trim();
+            const dateTimeLocation = match[2] ? match[2].trim() : '';
+            
+            let date = '';
+            let time = '';
+            let location = '';
+            
+            if (dateTimeLocation) {
+                // Try to parse date keywords
+                if (dateTimeLocation.toLowerCase().includes('today')) {
+                    date = new Date().toISOString().split('T')[0];
+                } else if (dateTimeLocation.toLowerCase().includes('tomorrow')) {
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    date = tomorrow.toISOString().split('T')[0];
+                } else {
+                    // Try to extract date
+                    const dateMatch = dateTimeLocation.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\b/i);
+                    if (dateMatch) {
+                        const months = {
+                            jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+                            jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+                        };
+                        const month = months[dateMatch[1].toLowerCase()];
+                        const day = parseInt(dateMatch[2]);
+                        const year = new Date().getFullYear();
+                        date = new Date(year, month, day).toISOString().split('T')[0];
+                    }
+                }
+                
+                // Try to extract time
+                const timeMatch = dateTimeLocation.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
+                if (timeMatch) {
+                    let hours = parseInt(timeMatch[1]);
+                    const minutes = timeMatch[2] ? parseInt(timeMatch[2]) : 0;
+                    const period = timeMatch[3] ? timeMatch[3].toLowerCase() : null;
+                    
+                    if (period === 'pm' && hours < 12) hours += 12;
+                    else if (period === 'am' && hours === 12) hours = 0;
+                    
+                    time = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+                }
+                
+                // Extract location (remaining text after removing date/time)
+                location = dateTimeLocation
+                    .replace(/\b(today|tomorrow)\b/gi, '')
+                    .replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\b/gi, '')
+                    .replace(/\d{1,2}(?::\d{2})?\s*(am|pm)?/gi, '')
+                    .trim();
+                }
+            return { title, date, time, location };
+       }
+       
+       function quickCreate() {
+           const text = quickCreateInput.value.trim();
+           if (!text) return;
+           
+           const parsed = parseQuickCreate(text);
+           if (parsed) {
+               // Pre-fill the form with parsed data
+               document.getElementById('event-title').value = parsed.title;
+               document.getElementById('event-date').value = parsed.date;
+               document.getElementById('event-time').value = parsed.time;
+               document.getElementById('event-location').value = parsed.location;
+               
+               selectedTemplate = 'party'; // Default template for quick create
+               openCreateModal();
+               quickCreateInput.value = '';
+           }
+       }
+       
+       quickCreateBtn.addEventListener('click', quickCreate);
+       quickCreateInput.addEventListener('keypress', (e) => {
+           if (e.key === 'Enter') {
+               quickCreate();
+           }
+       });
+       
+       // Save and load invitations
+       function saveInvitations() {
+           localStorage.setItem('invitations', JSON.stringify(invitations));
+       }
+       
+       function formatDate(dateStr) {
+           if (!dateStr) return '';
+           const date = new Date(dateStr);
+           return date.toLocaleDateString('en-US', { 
+               weekday: 'short', 
+               month: 'short', 
+               day: 'numeric',
+               year: 'numeric'
+           });
+       }
+       
+       function formatTime(timeStr) {
+           if (!timeStr) return '';
+           const [hours, minutes] = timeStr.split(':');
+           const date = new Date();
+           date.setHours(parseInt(hours), parseInt(minutes));
+           return date.toLocaleTimeString('en-US', { 
+               hour: 'numeric', 
+               minute: '2-digit' 
+           });
+       }
+       
+       function getTemplateEmoji(template) {
+           const emojis = {
+               birthday: '🎂',
+               wedding: '💒',
+               meeting: '📋',
+               party: '🎉',
+               graduation: '🎓',
+               custom: '✨',
+               modern: '📐',
+               vintage: '🏛️',
+               floral: '🌸',
+               geometric: '◆'
+           };
+           return emojis[template] || '📧';
+       }
+       
+       function renderInvitations() {
+           const invitationList = document.querySelector('.invitation-list');
+           
+           if (invitations.length === 0) {
+               invitationList.innerHTML = `
+                   <div style="text-align: center; padding: 40px; color: var(--secondary-text-color);">
+                       <span class="material-symbols-rounded" style="font-size: 3rem; margin-bottom: 10px; display: block;">mail</span>
+                       <p>No invitations created yet</p>
+                       <p style="font-size: 0.9rem; margin-top: 5px;">Create your first invitation to get started</p>
+                   </div>
+               `;
+               return;
+           }
+           
+           const sortedInvitations = [...invitations].sort((a, b) => 
+               new Date(b.created) - new Date(a.created)
+           );
+           
+           invitationList.innerHTML = sortedInvitations.map(invitation => `
+               <div class="invitation-card">
+                   <div class="invitation-header">
+                       <div class="invitation-title">
+                           ${getTemplateEmoji(invitation.template)} ${invitation.title}
+                       </div>
+                       <div class="invitation-actions">
+                           <button class="action-btn" onclick="editInvitation(${invitation.id})">
+                               <span class="material-symbols-rounded">edit</span>Edit
+                           </button>
+                           <button class="action-btn" onclick="shareInvitation(${invitation.id})">
+                               <span class="material-symbols-rounded">share</span>Share
+                           </button>
+                           <button class="action-btn" onclick="downloadInvitation(${invitation.id})">
+                               <span class="material-symbols-rounded">download</span>HTML
+                           </button>
+                           <button class="action-btn" onclick="downloadPDF(${invitation.id})">
+                               <span class="material-symbols-rounded">picture_as_pdf</span>PDF
+                           </button>
+                           <button class="action-btn" onclick="deleteInvitation(${invitation.id})" style="color: #ff6b6b;">
+                               <span class="material-symbols-rounded">delete</span>Delete
+                           </button>
+                       </div>
+                   </div>
+                   <div class="invitation-details">
+                       ${invitation.description || 'No description provided'}
+                   </div>
+                   <div class="invitation-meta">
+                       <span><span class="material-symbols-rounded" style="font-size: 1rem;">event</span> ${formatDate(invitation.date)}</span>
+                       ${invitation.time ? `<span><span class="material-symbols-rounded" style="font-size: 1rem;">schedule</span> ${formatTime(invitation.time)}</span>` : ''}
+                       ${invitation.location ? `<span><span class="material-symbols-rounded" style="font-size: 1rem;">location_on</span> ${invitation.location}</span>` : ''}
+                   </div>
+               </div>
+           `).join('');
+       }
+       
+       // Invitation actions
+       function editInvitation(id) {
+           const invitation = invitations.find(inv => inv.id === id);
+           if (!invitation) return;
+           
+           // Pre-fill the form with invitation data
+           document.getElementById('event-title').value = invitation.title;
+           document.getElementById('event-date').value = invitation.date;
+           document.getElementById('event-time').value = invitation.time || '';
+           document.getElementById('event-location').value = invitation.location || '';
+           document.getElementById('event-description').value = invitation.description || '';
+           document.getElementById('rsvp-email').value = invitation.rsvpEmail || '';
+           
+           selectedTemplate = invitation.template;
+           
+           // Remove the old invitation when form is submitted
+           const originalSubmitHandler = invitationForm.onsubmit;
+           invitationForm.onsubmit = (e) => {
+               e.preventDefault();
+               deleteInvitation(id);
+               originalSubmitHandler.call(invitationForm, e);
+               invitationForm.onsubmit = originalSubmitHandler;
+           };
+           
+           openCreateModal();
+       }
+       
+       function shareInvitation(id) {
+           const invitation = invitations.find(inv => inv.id === id);
+           if (!invitation) return;
+           
+           const shareText = `You're invited to ${invitation.title}!\n\n` +
+               `📅 ${formatDate(invitation.date)}` +
+               (invitation.time ? ` at ${formatTime(invitation.time)}` : '') +
+               (invitation.location ? `\n📍 ${invitation.location}` : '') +
+               (invitation.description ? `\n\n${invitation.description}` : '') +
+               (invitation.rsvpEmail ? `\n\nRSVP: ${invitation.rsvpEmail}` : '');
+           
+           if (navigator.share) {
+               navigator.share({
+                   title: invitation.title,
+                   text: shareText
+               });
+           } else {
+               navigator.clipboard.writeText(shareText).then(() => {
+                   alert('Invitation details copied to clipboard!');
+               });
+           }
+       }
+       
+       function downloadInvitation(id) {
+           const invitation = invitations.find(inv => inv.id === id);
+           if (!invitation) return;
+           
+           const html = generateInvitationHTML(invitation);
+           const blob = new Blob([html], { type: 'text/html' });
+           const url = URL.createObjectURL(blob);
+           
+           const a = document.createElement('a');
+           a.href = url;
+           a.download = `${invitation.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_invitation.html`;
+           document.body.appendChild(a);
+           a.click();
+           document.body.removeChild(a);
+           URL.revokeObjectURL(url);
+       }
+       
+       function downloadPDF(id) {
+           // This would require a PDF generation library like jsPDF
+           // For now, we'll show an alert
+           alert('PDF download feature will be available soon! Use HTML download for now.');
+       }
+       
+       function deleteInvitation(id) {
+           if (confirm('Are you sure you want to delete this invitation?')) {
+               invitations = invitations.filter(inv => inv.id !== id);
+               saveInvitations();
+               renderInvitations();
+           }
+       }
+       
+       function generateInvitationHTML(invitation) {
+           const templateColors = {
+               birthday: 'linear-gradient(135deg, #ff6b6b, #feca57)',
+               wedding: 'linear-gradient(135deg, #ff9a9e, #fecfef)',
+               meeting: 'linear-gradient(135deg, #667eea, #764ba2)',
+               party: 'linear-gradient(135deg, #f093fb, #f5576c)',
+               graduation: 'linear-gradient(135deg, #4facfe, #00f2fe)',
+               custom: 'linear-gradient(135deg, #667eea, #764ba2)',
+               modern: 'linear-gradient(135deg, #a8edea, #fed6e3)',
+               vintage: 'linear-gradient(135deg, #d299c2, #fef9d7)',
+               floral: 'linear-gradient(135deg, #89f7fe, #66a6ff)',
+               geometric: 'linear-gradient(135deg, #fdbb2d, #22c1c3)'
+           };
+           
+           return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>${invitation.title} - Invitation</title>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+           font-family: 'Inter', sans-serif;
+       }
+       
+       body {
+           background: #f0f0f0;
+           min-height: 100vh;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           padding: 20px;
+       }
+       
+       .invitation {
+           background: ${templateColors[invitation.template] || templateColors.custom};
+           color: white;
+           padding: 60px 40px;
+           border-radius: 30px;
+           text-align: center;
+           max-width: 600px;
+           width: 100%;
+           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+           position: relative;
+           overflow: hidden;
+       }
+       
+       .invitation::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+           pointer-events: none;
+       }
+       
+       .invitation-content {
+           position: relative;
+           z-index: 1;
+       }
+       
+       .event-title {
+           font-size: 3rem;
+           font-weight: 600;
+           margin-bottom: 20px;
+           text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       }
+       
+       .event-details {
+           font-size: 1.3rem;
+           margin-bottom: 15px;
+           opacity: 0.95;
+       }
+       
+       .event-description {
+           font-size: 1.1rem;
+           opacity: 0.9;
+           margin: 30px 0;
+           line-height: 1.6;
+       }
+       
+       .rsvp-info {
+           margin-top: 40px;
+           font-size: 1rem;
+           opacity: 0.8;
+       }
+       
+       .decoration {
+           font-size: 4rem;
+           margin: 20px 0;
+       }
+       
+       @media (max-width: 600px) {
+           .invitation {
+               padding: 40px 30px;
+           }
+           
+           .event-title {
+               font-size: 2.2rem;
+           }
+           
+           .event-details {
+               font-size: 1.1rem;
+           }
+       }
+   </style>
+</head>
+<body>
+   <div class="invitation">
+       <div class="invitation-content">
+           <div class="decoration">${getTemplateEmoji(invitation.template)}</div>
+           <h1 class="event-title">${invitation.title}</h1>
+           <div class="event-details">
+               ${formatDate(invitation.date)}${invitation.time ? ` at ${formatTime(invitation.time)}` : ''}
+           </div>
+           ${invitation.location ? `<div class="event-details">📍 ${invitation.location}</div>` : ''}
+           ${invitation.description ? `<div class="event-description">${invitation.description}</div>` : ''}
+           ${invitation.rsvpEmail ? `<div class="rsvp-info">RSVP: ${invitation.rsvpEmail}</div>` : ''}
+       </div>
+   </div>
+</body>
+</html>`;
+       }
+       
+       // Theme synchronization
+       document.addEventListener('DOMContentLoaded', () => {
+           const storedTheme = localStorage.getItem('theme') || 'dark';
+           document.body.classList.toggle('light-theme', storedTheme === 'light');
+           
+           const animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
+           document.body.classList.toggle('reduce-animations', !animationsEnabled);
+           
+           window.addEventListener('message', (event) => {
+               if (event.origin === window.location.origin) {
+                   if (event.data.type === 'themeUpdate') {
+                       const newTheme = event.data.theme;
+                       document.body.classList.toggle('light-theme', newTheme === 'light');
+                   } else if (event.data.type === 'animationsUpdate') {
+                       const enableAnimations = event.data.enabled;
+                       document.body.classList.toggle('reduce-animations', !enableAnimations);
+                   }
+               }
+           });
+           
+           setInterval(() => {
+               const currentTheme = localStorage.getItem('theme') || 'dark';
+               document.body.classList.toggle('light-theme', currentTheme === 'light');
+               const currentAnimState = localStorage.getItem('animationsEnabled') !== 'false';
+               document.body.classList.toggle('reduce-animations', !currentAnimState);
+           }, 5000);
+           
+           // Initialize the app
+           renderInvitations();
+       });
+       
+       // Make functions globally accessible
+       window.editInvitation = editInvitation;
+       window.shareInvitation = shareInvitation;
+       window.downloadInvitation = downloadInvitation;
+       window.downloadPDF = downloadPDF;
+       window.deleteInvitation = deleteInvitation;
+   </script>
 </body>
 </html>
