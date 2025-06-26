@@ -481,7 +481,8 @@
 
         button:active, .template-card:active {
             transform: scale(0.96);
-            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
+            transition: all 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
+            filter: brightness(1.5);
         }
 
         .reduce-animations * {
@@ -498,6 +499,7 @@
         .reduce-animations button:active, .reduce-animations .template-card:active {
             transform: scale(0.98) !important;
             transition: none !important;
+            filter: brightness(1.5) !important;
         }
 
         @media (max-width: 640px) {
