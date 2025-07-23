@@ -558,7 +558,7 @@
             <button class="tab-btn active" data-tab="home">
                 <span class="material-symbols-rounded">home</span>Home
             </button>
-            <button class="tab-btn" data-tab="invitations">
+            <button class="tab-btn" data-tab="library">
                 <span class="material-symbols-rounded">newsstand</span>Library
             </button>
             <button class="tab-btn" data-tab="templates">
@@ -719,7 +719,7 @@
                 const tabId = button.dataset.tab + '-content';
                 document.getElementById(tabId).classList.add('active');
                 
-                if (button.dataset.tab === 'invitations') {
+                if (button.dataset.tab === 'library') {
                     renderInvitations();
                 }
             });
@@ -824,11 +824,11 @@
             saveInvitations();
             closeCreateModal();
             
-            // Switch to invitations tab
-            document.querySelector('[data-tab="invitations"]').click();
+            // Switch to library tab
+            document.querySelector('[data-tab="library"]').click();
         });
         
-        // Quick   functionality
+        // Quick create functionality
         const quickCreateInput = document.querySelector('.create-input');
         const quickCreateBtn = document.getElementById('quick-create-btn');
         
@@ -991,9 +991,6 @@
                            <button class="action-btn" onclick="downloadInvitation(${invitation.id})">
                                <span class="material-symbols-rounded">download</span>HTML
                            </button>
-                           <button class="action-btn" onclick="downloadPDF(${invitation.id})">
-                               <span class="material-symbols-rounded">picture_as_pdf</span>PDF
-                           </button>
                            <button class="action-btn" onclick="deleteInvitation(${invitation.id})" style="color: #ff6b6b;">
                                <span class="material-symbols-rounded">delete</span>Delete
                            </button>
@@ -1076,12 +1073,6 @@
            a.click();
            document.body.removeChild(a);
            URL.revokeObjectURL(url);
-       }
-       
-       function downloadPDF(id) {
-           // This would require a PDF generation library like jsPDF
-           // For now, we'll show an alert
-           alert('PDF download feature will be available soon! Use HTML download for now.');
        }
        
        function deleteInvitation(id) {
@@ -1232,7 +1223,6 @@
        window.editInvitation = editInvitation;
        window.shareInvitation = shareInvitation;
        window.downloadInvitation = downloadInvitation;
-       window.downloadPDF = downloadPDF;
        window.deleteInvitation = deleteInvitation;
    </script>
 </body>
