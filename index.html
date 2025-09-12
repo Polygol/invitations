@@ -372,9 +372,9 @@
         .modal-content {
             background-color: var(--search-background);
             border-radius: 40px;
-            padding: 30px;
+            padding: 25px;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px) saturate(2) var(--edge-refraction-filter);
             box-shadow: var(--sun-shadow), 0 0 50px rgba(0, 0, 0, 0.2);
@@ -387,11 +387,12 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
+            padding: 0 8px;
         }
 
         .modal-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 500;
             font-family: 'Open Runde';
         }
 
@@ -421,6 +422,7 @@
             border: 1px solid var(--glass-border);
             background-color: var(--search-background);
             color: var(--text-color);
+            box-shadow: var(--sun-shadow);
             font-size: 1rem;
             outline: none;
         }
@@ -442,22 +444,17 @@
         .submit-btn {
             background-color: var(--text-color);
             color: var(--background-color);
-            border: none;
+            border: 1px solid var(--glass-border);
             border-radius: 25px;
-            padding: 12px 24px;
+            padding: 12px;
             cursor: pointer;
             font-weight: 500;
-            font-size: 1rem;
-            width: 100%;
             margin-top: 10px;
+            box-shadow: var(--sun-shadow);
         }
 
         .preview-section {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: var(--overlay-color);
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
+            margin: 25px 0;
         }
 
         .preview-title {
