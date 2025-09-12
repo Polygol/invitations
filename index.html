@@ -218,6 +218,8 @@
             background-color: var(--search-background);
             border-radius: 25px;
             border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+            box-shadow: var(--sun-shadow);
         }
 
         .create-input {
@@ -230,15 +232,12 @@
         }
 
         .create-btn {
-            background-color: var(--search-background);
+            background-color: transparent;
             color: var(--text-color);
-            border: 1px solid var(--glass-border);
+            border: none;
             border-radius: 25px;
-            padding: 8px 15px;
             cursor: pointer;
             transition: background-color 0.2s;
-            backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
-            box-shadow: var(--sun-shadow);
         }
 
         .invitation-list {
@@ -336,15 +335,11 @@
 
         .template-preview {
             width: 100%;
-            height: 120px;
-            background: linear-gradient(135deg, var(--search-background), var(--overlay-color));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: var(--secondary-text-color);
-            border: 1px solid var(--glass-border);
         }
 
         .create-modal {
@@ -609,7 +604,7 @@
         <!-- Create Tab -->
         <div class="tab-content active" id="create-content">
             <div class="input-section">
-                <input type="text" class="create-input" placeholder="Try 'Birthday Party @ May 15 3pm'">
+                <input type="text" class="create-input" placeholder="Add 'Event @ Date'">
                 <button class="create-btn" id="quick-create-btn">
                     <span class="material-symbols-rounded">add</span>
                 </button>
@@ -617,39 +612,39 @@
             
             <div class="templates-grid">
                 <div class="template-card" data-template="birthday">
+                    <div class="template-preview">🎂</div>
                     <div class="template-title">Birthday Party</div>
                     <div class="template-description">Perfect for birthday celebrations with cake and balloons theme</div>
-                    <div class="template-preview">🎂</div>
                 </div>
                 
                 <div class="template-card" data-template="wedding">
+                    <div class="template-preview">💌</div>
                     <div class="template-title">Wedding</div>
                     <div class="template-description">Elegant design for wedding invitations and ceremonies</div>
-                    <div class="template-preview">💒</div>
                 </div>
                 
                 <div class="template-card" data-template="meeting">
+                    <div class="template-preview">📋</div>
                     <div class="template-title">Business Meeting</div>
                     <div class="template-description">Professional template for corporate events and meetings</div>
-                    <div class="template-preview">📋</div>
                 </div>
                 
                 <div class="template-card" data-template="party">
+                    <div class="template-preview">🎉</div>
                     <div class="template-title">General Party</div>
                     <div class="template-description">Fun template for any celebration or gathering</div>
-                    <div class="template-preview">🎉</div>
                 </div>
                 
                 <div class="template-card" data-template="graduation">
+                    <div class="template-preview">🎓</div>
                     <div class="template-title">Graduation</div>
                     <div class="template-description">Academic theme for graduation ceremonies</div>
-                    <div class="template-preview">🎓</div>
                 </div>
                 
                 <div class="template-card" data-template="custom">
+                    <div class="template-preview">✏️</div>
                     <div class="template-title">Custom Design</div>
                     <div class="template-description">Start from scratch with your own design</div>
-                    <div class="template-preview">✨</div>
                 </div>
             </div>
         </div>
@@ -665,27 +660,27 @@
         <div class="tab-content" id="templates-content">
             <div class="templates-grid">
                 <div class="template-card" data-template="modern">
+                    <div class="template-preview">🍌</div>
                     <div class="template-title">Modern Minimalist</div>
                     <div class="template-description">Clean and contemporary design</div>
-                    <div class="template-preview">📐</div>
                 </div>
                 
                 <div class="template-card" data-template="vintage">
+                    <div class="template-preview">🏛️</div>
                     <div class="template-title">Vintage Classic</div>
                     <div class="template-description">Traditional style with ornate details</div>
-                    <div class="template-preview">🏛️</div>
                 </div>
                 
                 <div class="template-card" data-template="floral">
+                    <div class="template-preview">🌸</div>
                     <div class="template-title">Floral Garden</div>
                     <div class="template-description">Beautiful botanical designs</div>
-                    <div class="template-preview">🌸</div>
                 </div>
                 
                 <div class="template-card" data-template="geometric">
+                    <div class="template-preview">📐</div>
                     <div class="template-title">Geometric Pattern</div>
                     <div class="template-description">Bold shapes and modern patterns</div>
-                    <div class="template-preview">◆</div>
                 </div>
             </div>
         </div>
@@ -723,7 +718,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea class="form-textarea" id="event-description" placeholder="Additional details about your event..."></textarea>
+                    <textarea class="form-textarea" id="event-description" placeholder="Additional details about your event"></textarea>
                 </div>
                 
                 <div class="form-group">
