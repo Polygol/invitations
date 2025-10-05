@@ -157,7 +157,7 @@
         .tab-btn {
             background-color: var(--search-background);
             color: transparent;
-            border-radius: 25px;
+            border-radius: 35px;
             padding: 12px 16px;
             font-size: 0;
             cursor: pointer;
@@ -172,7 +172,8 @@
         .tab-btn.active {
             background-color: var(--secondary-text-color);
             color: var(--background-color);
-            border-radius: 17px;
+            border-radius: 35px;
+            corner-shape: superellipse(1.5);
             font-family: 'Open Runde';
             font-weight: 500;
             padding: 10px 18px 10px 16px;
@@ -200,14 +201,13 @@
 
         .input-section {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background-color: var(--search-background);
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
-            box-shadow: var(--sun-shadow);
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 500px;
+            width: 90%;
+            z-index: 1;
         }
 
         .create-input {
@@ -217,15 +217,36 @@
             color: var(--text-color);
             font-size: 1rem;
             outline: none;
+            padding: 15px 20px;
+            background-color: var(--search-background);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
+            box-shadow: var(--sun-shadow), 0 0 15px rgba(0, 0, 0, 0.05);
+            margin-right: 15px;
+            transition: all 0.3s cubic-bezier(.3, 1.2, .64, 1);
+        }
+        
+        .create-input:focus {
+            margin-right: 0;
+            min-width: 100%;
         }
 
         .create-btn {
-            background-color: transparent;
+            padding: 15px 15px;
+            background-color: var(--search-background);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
+            box-shadow: var(--sun-shadow), 0 0 15px rgba(0, 0, 0, 0.05);
             color: var(--text-color);
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s cubic-bezier(.3, 1.2, .64, 1);
+        }
+
+        .input-section:has(.create-input:focus) .create-btn {
+            scale: 0;
+            width: 0;
+            opacity: 0;
         }
 
         .invitation-list {
@@ -237,7 +258,8 @@
         .invitation-card {
             padding: 20px;
             background-color: var(--search-background);
-            border-radius: 25px;
+            border-radius: 35px;
+            corner-shape: superellipse(1.5);
             border: 1px solid var(--glass-border);
             backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
             box-shadow: var(--sun-shadow);
@@ -300,7 +322,8 @@
         .template-card {
             padding: 20px;
             background-color: var(--search-background);
-            border-radius: 25px;
+            border-radius: 35px;
+            corner-shape: superellipse(1.5);
             border: 1px solid var(--glass-border);
             cursor: pointer;
             transition: transform 0.2s, filter 0.2s;
@@ -354,7 +377,8 @@
 
         .modal-content {
             background-color: var(--search-background);
-            border-radius: 40px;
+            border-radius: 50px;
+            corner-shape: superellipse(1.5);
             padding: 25px;
             width: 90%;
             max-width: 500px;
@@ -401,7 +425,8 @@
         .form-input, .form-textarea {
             width: 100%;
             padding: 12px 16px;
-            border-radius: 15px;
+            border-radius: 25px;
+            corner-shape: superellipse(1.5);
             border: 1px solid var(--glass-border);
             background-color: var(--search-background);
             color: var(--text-color);
@@ -453,7 +478,8 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
+            corner-shape: superellipse(1.5);
             text-align: center;
             position: relative;
             overflow: hidden;
