@@ -1108,7 +1108,7 @@
                });
            } else {
                navigator.clipboard.writeText(shareText).then(() => {
-                   alert('Invitation details copied to clipboard!');
+                   Gurasuraisu.showPopup('Invitation details copied to clipboard');
                });
            }
        }
@@ -1130,8 +1130,8 @@
            URL.revokeObjectURL(url);
        }
        
-       function deleteInvitation(id) {
-           if (confirm('Are you sure you want to delete this invitation?')) {
+       async function deleteInvitation(id) {
+           if (await Gurasuraisu.showConfirm('Are you sure you want to delete this invitation?')) {
                invitations = invitations.filter(inv => inv.id !== id);
                saveInvitations();
                renderInvitations();
