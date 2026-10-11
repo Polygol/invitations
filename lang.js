@@ -1,5 +1,12 @@
 // Polygol Invitations Language Dictionary
-const LANG_EN_INVITATIONS = {
+window.LANG_EN_INVITATIONS = {
+    SHARE_INVITATION_PREFIX: "You're invited to {title}!\n\n",
+    AT_TIME: " at {time}",
+    EDIT: "Edit",
+    SHARE: "Share",
+    DELETE: "Delete",
+    NO_DESCRIPTION_PROVIDED: "No description provided",
+    RSVP_PREFIX: "RSVP: ",
     TITLE: "Invitations",
     HOME: "Home",
     TEMPLATES: "Templates",
@@ -41,10 +48,18 @@ const LANG_EN_INVITATIONS = {
     PREVIEW_DETAILS: "Date & Time • Location",
     PREVIEW_DESCRIPTION: "Event description will appear here",
     CREATE_INVITATION_BTN: "Create Invitation",
-    DELETE_CONFIRM: "Are you sure you want to delete this invitation?"
+    DELETE_CONFIRM: "Are you sure you want to delete this invitation?",
+    INVITATION_COPIED: "Invitation details copied to clipboard",
 };
 
-const LANG_JP_INVITATIONS = {
+window.LANG_JP_INVITATIONS = {
+    SHARE_INVITATION_PREFIX: "「{title}」にご招待します！\n\n",
+    AT_TIME: " {time}",
+    EDIT: "編集",
+    SHARE: "共有",
+    DELETE: "削除",
+    NO_DESCRIPTION_PROVIDED: "説明はありません",
+    RSVP_PREFIX: "出欠返信: ",
     TITLE: "招待状",
     HOME: "ホーム",
     TEMPLATES: "テンプレート",
@@ -86,10 +101,18 @@ const LANG_JP_INVITATIONS = {
     PREVIEW_DETAILS: "日時 • 場所",
     PREVIEW_DESCRIPTION: "イベントの説明がここに表示されます",
     CREATE_INVITATION_BTN: "招待状を作成",
-    DELETE_CONFIRM: "この招待状を削除してもよろしいですか？"
+    DELETE_CONFIRM: "この招待状を削除してもよろしいですか？",
+    INVITATION_COPIED: "招待状の詳細をクリップボードにコピーしました",
 };
 
-const LANG_KO_INVITATIONS = {
+window.LANG_KO_INVITATIONS = {
+    SHARE_INVITATION_PREFIX: "{title}에 초대합니다!\n\n",
+    AT_TIME: " {time}",
+    EDIT: "편집",
+    SHARE: "공유",
+    DELETE: "삭제",
+    NO_DESCRIPTION_PROVIDED: "설명이 제공되지 않았습니다",
+    RSVP_PREFIX: "회신: ",
     TITLE: "초대장",
     HOME: "홈",
     TEMPLATES: "서식",
@@ -131,10 +154,18 @@ const LANG_KO_INVITATIONS = {
     PREVIEW_DETAILS: "일시 • 장소",
     PREVIEW_DESCRIPTION: "이벤트 설명이 여기에 표시됩니다",
     CREATE_INVITATION_BTN: "초대장 만들기",
-    DELETE_CONFIRM: "이 초대장을 삭제하시겠습니까?"
+    DELETE_CONFIRM: "이 초대장을 삭제하시겠습니까?",
+    INVITATION_COPIED: "초대장 세부정보가 클립보드에 복사되었습니다",
 };
 
-const LANG_ZH_INVITATIONS = {
+window.LANG_ZH_INVITATIONS = {
+    SHARE_INVITATION_PREFIX: "邀请您参加 {title}！\n\n",
+    AT_TIME: " {time}",
+    EDIT: "编辑",
+    SHARE: "分享",
+    DELETE: "删除",
+    NO_DESCRIPTION_PROVIDED: "未提供描述",
+    RSVP_PREFIX: "回复: ",
     TITLE: "邀请函",
     HOME: "首页",
     TEMPLATES: "模板",
@@ -176,5 +207,11 @@ const LANG_ZH_INVITATIONS = {
     PREVIEW_DETAILS: "日期时间 • 地点",
     PREVIEW_DESCRIPTION: "活动描述将在此处显示",
     CREATE_INVITATION_BTN: "生成邀请函",
-    DELETE_CONFIRM: "确定要删除此邀请函吗？"
+    DELETE_CONFIRM: "确定要删除此邀请函吗？",
+    INVITATION_COPIED: "邀请函详情已复制到剪贴板",
 };
+
+var LANG_EN_INVITATIONS = window.LANG_EN_INVITATIONS;
+var LANG_JP_INVITATIONS = window.LANG_JP_INVITATIONS;
+var LANG_KO_INVITATIONS = window.LANG_KO_INVITATIONS;
+var LANG_ZH_INVITATIONS = window.LANG_ZH_INVITATIONS;
