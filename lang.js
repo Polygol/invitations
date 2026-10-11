@@ -1,4 +1,7 @@
 // Polygol Invitations Language Dictionary
+window.bcpMap = { EN: 'en-US', JP: 'ja-JP', KO: 'ko-KR', ZH: 'zh-CN' };
+var bcpMap = window.bcpMap;
+
 window.LANG_EN_INVITATIONS = {
     SHARE_INVITATION_PREFIX: "You're invited to {title}!\n\n",
     AT_TIME: " at {time}",
